@@ -20,9 +20,12 @@ mongoose.connect(uri,option)
 
 //import routes
 const authRoutes  = require('./routes/auth');
+const admin = require('./routes/admin');
+const validaToken = require('./routes/validate-token');
 //routes middlewares
 
 app.use('/api/user', authRoutes);
+app.use('/api/admin',validaToken,admin);
 
 app.get('/',(req, res) =>{
     res.json({
@@ -34,7 +37,7 @@ app.get('/',(req, res) =>{
 
 //Iniciar Server
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT,()=>{
     console.log(`Servidor corriendo en Puerto ${PORT}`);
 })
